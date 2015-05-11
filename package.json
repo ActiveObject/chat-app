@@ -12,7 +12,8 @@
     "clean": "rm -rf _public && mkdir _public",
     "copy:assets": "cp -R src/assets/* _public/",
     "webpack:dev": "webpack-dev-server --entry=./src/main.js --progress --colors --port=5004 --content-base=_public --debug --devtool eval-source-map --output-pathinfo --inline",
-    "link-app": "ln -s ../src node_modules/app"
+    "link-app": "ln -s ../src node_modules/app",
+    "deploy": "npm run build && divshot push production"
   },
   "keywords": [
     "chat"
@@ -25,6 +26,7 @@
     "babel-core": "^5.2.17",
     "babel-loader": "^5.0.0",
     "css-loader": "^0.12.0",
+    "divshot-cli": "^1.10.5",
     "expose-loader": "^0.6.0",
     "node-libs-browser": "^0.5.0",
     "style-loader": "^0.12.2",

@@ -1,6 +1,6 @@
 # chat-app
 
-# Build
+## Build
 
 Start development server on 5004 port
 ```
@@ -15,4 +15,9 @@ $ npm run build
 Start static http server on prebuilded app
 ```
 $ npm run start
+```
+
+## Deploy
+```
+$ npm run deploy
 ```
