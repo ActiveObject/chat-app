@@ -1,0 +1,33 @@
+.app-container__bg::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  content: '';
+  width: 100%;
+  height: 150px;
+  background-color: #343B80;
+}
+
+.app-container__fg {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(100, 100, 100, 0.2);
+}
+
+.app-container__layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.app-container__outlet {
+  background-color: white;
+  width: 1200px;
+  height: 90%;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px rgba(0,0,0, .3);
+}
