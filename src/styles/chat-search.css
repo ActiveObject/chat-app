@@ -1,0 +1,18 @@
+.chat-search {
+  width: 100%;
+}
+
+.chat-search__input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  line-height: 1.5rem;
+  font-size: 0.8rem;
+  background-color: #1E88E5;
+  color: #E3F2FD;
+}
+
+.chat-search ::-webkit-input-placeholder {
+  color: #90CAF9;
+}

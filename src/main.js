@@ -9,6 +9,7 @@ import Message from 'app/values/Message'
 import 'app/styles/main.css'
 import 'app/styles/app-container.css'
 import 'app/styles/room-list-item.css'
+import 'app/styles/chat-search.css'
 
 React.render(React.createElement(AppContainer), document.getElementById('app'));
 
