@@ -1,4 +1,5 @@
 import React from 'react'
+import RoomList from 'app/ui/RoomList'
 import 'app/styles/app-container.css'
 
 export default React.createClass({
@@ -7,7 +8,11 @@ export default React.createClass({
       <div className='app-container'>
         <div className='app-container__layer app-container__bg'></div>
         <div className='app-container__layer app-container__fg'>
-          <div className='app-container__outlet'>{this.props.children}</div>
+          <div className='app-container__outlet'>
+            <div className='app-container__sidebar'>
+              <RoomList/>
+            </div>
+          </div>
         </div>
       </div>
     );

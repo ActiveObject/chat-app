@@ -25,9 +25,21 @@
 }
 
 .app-container__outlet {
+  display: flex;
   background-color: white;
   width: 1200px;
   height: 90%;
   border-radius: 2px;
   box-shadow: 0 1px 1px rgba(0,0,0, .3);
+}
+
+.app-container__sidebar {
+  width: 30%;
+  height: 100%;
+  background-color: #343B80;
+}
+
+.app-container__content {
+  width: 70%;
+  height: 100%;
 }
