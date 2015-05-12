@@ -2,7 +2,6 @@ import React from 'react'
 import TransitionGroup from 'react/lib/ReactCSSTransitionGroup'
 import {List} from 'immutable'
 import rooms from 'app/entities/rooms'
-import 'app/styles/room-list-item.css'
 import 'app/styles/transition/fadein.css'
 
 var RoomListItem = React.createClass({

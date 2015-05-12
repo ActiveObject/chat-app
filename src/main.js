@@ -5,7 +5,10 @@ import vbus from 'app/vbus'
 import Room from 'app/values/Room'
 import User from 'app/values/User'
 import Message from 'app/values/Message'
+
 import 'app/styles/main.css'
+import 'app/styles/app-container.css'
+import 'app/styles/room-list-item.css'
 
 React.render(React.createElement(AppContainer), document.getElementById('app'));
 

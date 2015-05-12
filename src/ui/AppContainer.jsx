@@ -1,6 +1,5 @@
 import React from 'react'
 import RoomList from 'app/ui/RoomList'
-import 'app/styles/app-container.css'
 
 export default React.createClass({
   render: function () {
