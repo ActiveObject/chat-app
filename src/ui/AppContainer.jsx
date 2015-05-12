@@ -24,6 +24,10 @@ export default React.createClass({
               </div>
               <RoomList/>
             </div>
+
+            <div className='app-container__content'>
+              <div className='app-container__content-header'></div>
+            </div>
           </div>
         </div>
       </div>
