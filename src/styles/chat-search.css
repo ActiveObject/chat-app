@@ -11,6 +11,7 @@
   font-size: 0.8rem;
   background-color: #1E88E5;
   color: #E3F2FD;
+  font-weight: 100;
 }
 
 .chat-search ::-webkit-input-placeholder {

@@ -25,6 +25,7 @@
 .room-list-item__text {
   color: #BBDEFB;
   font-size: 0.8rem;
+  font-weight: 300;
 }
 
 .room-list-item__time {
