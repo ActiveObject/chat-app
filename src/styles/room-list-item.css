@@ -2,10 +2,11 @@
   display: flex;
   height: 80px;
   width: 100%;
+  cursor: pointer;
 }
 
 .room-list-item:hover {
-  background-color: #2A3164;
+  background-color: #1565C0;
 }
 
 .room-list-item__avatar {
@@ -22,12 +23,12 @@
 }
 
 .room-list-item__text {
-  color: #9294A8;
+  color: #BBDEFB;
   font-size: 0.8rem;
 }
 
 .room-list-item__time {
-  color: #9294A8;
+  color: #BBDEFB;
   font-size: 0.7rem;
 }
 
