@@ -57,3 +57,23 @@
   display: flex;
   align-items: center;
 }
+
+.app-container__content-body,
+.app-container__sidebar-body {
+  height: calc(100% - 160px);
+}
+
+.app-container__content-footer,
+.app-container__sidebar-footer {
+  height: 80px;
+  width: 100%;
+}
+
+.app-container__content-footer {
+  background-color: #F7F7F7;
+  border-top: 1px solid #DDD;
+}
+
+.app-container__sidebar-footer {
+  border-top: 1px solid #1565C0;
+}

@@ -1,5 +1,7 @@
 import React from 'react'
 import RoomList from 'app/ui/RoomList'
+import Conversation from 'app/ui/Conversation'
+import NewMessageView from 'app/ui/NewMessageView'
 
 var ChatSearch = React.createClass({
   render: function () {
@@ -22,11 +24,22 @@ export default React.createClass({
               <div className='app-container__sidebar-header'>
                 <ChatSearch />
               </div>
-              <RoomList/>
+              <div className='app-container__sidebar-body'>
+                <RoomList/>
+              </div>
+              <div className='app-container__sidebar-footer'></div>
             </div>
 
             <div className='app-container__content'>
               <div className='app-container__content-header'></div>
+
+              <div className='app-container__content-body'>
+                <Conversation />
+              </div>
+
+              <div className='app-container__content-footer'>
+                <NewMessageView />
+              </div>
             </div>
           </div>
         </div>
