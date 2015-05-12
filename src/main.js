@@ -68,4 +68,12 @@ var room3 = new Room({
 });
 
 vbus.log();
-vbus.push([':app/rooms', List.of(room1, room2, room3)]);
+vbus.push([':app/rooms', List.of(room1, room2)]);
+
+setTimeout(function() {
+  vbus.push([':app/rooms', List.of(room1, room2, room3)]);
+}, 2000)
+
+setTimeout(function() {
+  vbus.push([':app/rooms', List.of(room1, room2, room3, room1)]);
+}, 3000)

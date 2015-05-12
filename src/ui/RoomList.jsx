@@ -1,7 +1,9 @@
 import React from 'react'
+import TransitionGroup from 'react/lib/ReactCSSTransitionGroup'
 import {List} from 'immutable'
 import rooms from 'app/entities/rooms'
 import 'app/styles/room-list-item.css'
+import 'app/styles/transition/fadein.css'
 
 var RoomListItem = React.createClass({
   render: function() {
@@ -41,12 +43,14 @@ export default React.createClass({
   },
 
   render: function() {
-    var rooms = this.state.rooms.map(function(room) {
-      return <RoomListItem room={room} />;
+    var rooms = this.state.rooms.map(function(room, i) {
+      return <RoomListItem key={i} room={room} />;
     });
 
     return (
-      <div className='room-list'>{rooms}</div>
+      <div className='room-list'>
+        <TransitionGroup transitionName='fadein'>{rooms}</TransitionGroup>
+      </div>
     );
   }
 })
