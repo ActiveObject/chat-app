@@ -4,4 +4,5 @@ import tagOf from 'app/fn/tagOf'
 
 export default vbus
   .filter(v => tagOf(v) === ':app/rooms')
+  .map(v => v[1])
   .toProperty(List())
