@@ -6,7 +6,7 @@
 }
 
 .room-list-item:hover {
-  background-color: #1565C0;
+  background-color: #303F9F;
 }
 
 .room-list-item__avatar {
@@ -23,13 +23,13 @@
 }
 
 .room-list-item__text {
-  color: #BBDEFB;
+  color: #C5CAE9;
   font-size: 0.8rem;
   font-weight: 300;
 }
 
 .room-list-item__time {
-  color: #BBDEFB;
+  color: #C5CAE9;
   font-size: 0.7rem;
 }
 

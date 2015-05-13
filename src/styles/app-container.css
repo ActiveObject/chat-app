@@ -5,7 +5,7 @@
   content: '';
   width: 100%;
   height: 120px;
-  background-color: #0D47A1;
+  background-color: #303F9F;
 }
 
 .app-container__fg {
@@ -37,7 +37,7 @@
 .app-container__sidebar {
   width: 30%;
   height: 100%;
-  background-color: #1976D2;
+  background-color: #3F51B5;
 }
 
 .app-container__content {
@@ -75,5 +75,5 @@
 }
 
 .app-container__sidebar-footer {
-  border-top: 1px solid #1565C0;
+  border-top: 1px solid #303F9F;
 }
