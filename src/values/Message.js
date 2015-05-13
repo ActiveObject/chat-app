@@ -1,6 +1,6 @@
 function Message(attrs) {
   this.text = attrs.text;
-  this.owner = attrs.owner;
+  this.author = attrs.author;
   this.time = attrs.time;
 }
 

@@ -15,7 +15,7 @@ var RoomListItem = React.createClass({
           <img width='40' height='40' src={picture} alt={nickname} />
         </div>
         <div className='room-list-item__content'>
-          <div className='room-list_item__top'>
+          <div className='room-list-item__top'>
             <div className='room-list-item__members'>Corey and Frank</div>
             <div className='room-list-item__time'>2:49 pm</div>
           </div>

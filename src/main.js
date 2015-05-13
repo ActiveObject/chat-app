@@ -11,6 +11,7 @@ import 'app/styles/app-container.css'
 import 'app/styles/room-list-item.css'
 import 'app/styles/chat-search.css'
 import 'app/styles/new-message-view.css'
+import 'app/styles/message.css'
 
 React.render(React.createElement(AppContainer), document.getElementById('app'));
 
@@ -44,19 +45,25 @@ var megan = new User({
 
 var msg1 = new Message({
   text: 'Happy New Year!',
-  owner: john,
+  author: john,
   time: new Date('2015-01-01T00:00:02Z')
 });
 
 var msg2 = new Message({
   text: 'Happy New Year too!',
-  owner: casey,
+  author: casey,
+  time: new Date('2015-01-01T00:10:00Z')
+});
+
+var msg3 = new Message({
+  text: 'In Back to the Future, Doc states that the time machine is electrical but that he needs a nuclear reaction (produced by plutioum stolen from a group of Libyan terroists) to generate the 1.21 gigawatts of electricity needed.',
+  author: john,
   time: new Date('2015-01-01T00:10:00Z')
 });
 
 var room1 = new Room({
   members: Set.of(john, casey),
-  history: List.of(msg1, msg2),
+  history: List.of(msg1, msg2, msg3),
   isEnabledNotification: true
 });
 

@@ -40,7 +40,7 @@
   width: 240px;
 }
 
-.room-list_item__top {
+.room-list-item__top {
   display: flex;
   justify-content: space-between;
   width: 100%;

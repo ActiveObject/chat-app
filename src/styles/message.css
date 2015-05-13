@@ -1,0 +1,41 @@
+.message {
+  display: flex;
+  width: 100%;
+  padding: 0 40px 0 20px;
+}
+
+.message__avatar {
+  width: 40px;
+  height: 40px;
+  margin: 20px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.message__content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+}
+
+.message__top {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  line-height: 1rem;
+  padding-bottom: .4rem;
+}
+
+.message__text {
+  font-size: .8rem;
+  color: #555;
+}
+
+.message__time {
+  font-size: .7rem;
+}
+
+.message__author {
+  font-size: .8rem
+}
