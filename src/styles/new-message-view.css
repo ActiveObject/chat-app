@@ -1,0 +1,21 @@
+.new-message-view {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.new-message-view__input {
+  border: 1px solid #DDD;
+  line-height: 2rem;
+  font-size: .8rem;
+  padding: .5rem 1rem;
+  outline: none;
+  width: 80%;
+}
+
+.new-message-view ::-webkit-input-placeholder {
+  font-weight: 300;
+  font-family: 'Roboto';
+}

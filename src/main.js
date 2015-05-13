@@ -10,6 +10,7 @@ import 'app/styles/main.css'
 import 'app/styles/app-container.css'
 import 'app/styles/room-list-item.css'
 import 'app/styles/chat-search.css'
+import 'app/styles/new-message-view.css'
 
 React.render(React.createElement(AppContainer), document.getElementById('app'));
 
