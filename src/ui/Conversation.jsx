@@ -1,5 +1,5 @@
 import React from 'react'
-import rooms from 'app/entities/rooms'
+import vbus from 'app/vbus'
 
 var Message = React.createClass({
   render: function () {
@@ -24,7 +24,7 @@ var Message = React.createClass({
 
 export default React.createClass({
   componentWillMount: function () {
-    this.unsub = rooms.onValue(v => this.setState({ room: v.first() }))
+    this.unsub = vbus.onValue(app => this.setState({ room: app.rooms[0] }))
   },
 
   componentWillUnmount: function () {
@@ -32,7 +32,7 @@ export default React.createClass({
   },
 
   render: function () {
-    if (!this.state.room) {
+    if (!this.state || !this.state.room) {
       return <div className='conversation'></div>;
     }
 

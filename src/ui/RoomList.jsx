@@ -1,7 +1,6 @@
 import React from 'react'
 import TransitionGroup from 'react/lib/ReactCSSTransitionGroup'
-import {List} from 'immutable'
-import rooms from 'app/entities/rooms'
+import vbus from 'app/vbus'
 import 'app/styles/transition/fadein.css'
 
 var RoomListItem = React.createClass({
@@ -29,12 +28,12 @@ var RoomListItem = React.createClass({
 export default React.createClass({
   getInitialState: function() {
     return {
-      rooms: List()
+      rooms: []
     }
   },
 
   componentWillMount: function() {
-    this.unsub = rooms.onValue(vs => this.setState({ rooms: vs }));
+    this.unsub = vbus.onValue(app => this.setState({ rooms: app.rooms }));
   },
 
   componentWillUnmount: function() {
