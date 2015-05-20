@@ -14,6 +14,12 @@ var ScrollLayer = React.createClass({
 
   componentDidUpdate: function () {
     this.scroll.refresh()
+
+    var lastMsg = this.refs.view.getDOMNode().querySelector('.message:last-child')
+
+    if (lastMsg) {
+      this.scroll.scrollToElement(lastMsg, 300, null, null, IScroll.utils.ease.quadratic)
+    }
   },
 
   render: function() {
