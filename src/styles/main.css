@@ -9,3 +9,8 @@ html, body, #app {
 * {
   box-sizing: border-box;
 }
+
+.scroll-wrapper {
+  height: 100%;
+  overflow: hidden;
+}

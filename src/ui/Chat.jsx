@@ -1,7 +1,29 @@
+import IScroll from 'iscroll/build/iscroll'
 import vbus from 'app/vbus'
 import Message from 'app/values/Message'
 import Conversation from 'app/ui/Conversation'
 import NewMessageView from 'app/ui/NewMessageView'
+
+var ScrollLayer = React.createClass({
+  componentDidMount: function() {
+    this.scroll = new IScroll(this.refs.view.getDOMNode(), {
+      mouseWheel: true,
+      scrollX: false
+    })
+  },
+
+  componentDidUpdate: function () {
+    this.scroll.refresh()
+  },
+
+  render: function() {
+    return (
+      <div className='scroll-wrapper' ref='view'>
+        <div className='scroll-body'>{this.props.children}</div>
+      </div>
+    )
+  }
+})
 
 export default React.createClass({
   componentWillMount: function () {
@@ -20,7 +42,9 @@ export default React.createClass({
         <div className='app-container__content-header'></div>
 
         <div className='app-container__content-body'>
-          <Conversation messages={messages} />
+          <ScrollLayer>
+            <Conversation messages={messages} />
+          </ScrollLayer>
         </div>
 
         <div className='app-container__content-footer'>
