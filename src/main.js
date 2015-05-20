@@ -82,17 +82,20 @@ var room3 = new Room({
 vbus.log();
 
 vbus.push({
+  user: john,
   rooms: [room1, room2]
 })
 
 setTimeout(function() {
   vbus.push({
+    user: john,
     rooms: [room1, room2, room3]
   });
 }, 2000)
 
 setTimeout(function() {
   vbus.push({
+    user: john,
     rooms: [room1, room2, room3, room1]
   });
 }, 3000)

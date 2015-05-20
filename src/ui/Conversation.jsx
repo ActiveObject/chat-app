@@ -23,20 +23,8 @@ var Message = React.createClass({
 })
 
 export default React.createClass({
-  componentWillMount: function () {
-    this.unsub = vbus.onValue(app => this.setState({ room: app.rooms[0] }))
-  },
-
-  componentWillUnmount: function () {
-    this.unsub()
-  },
-
   render: function () {
-    if (!this.state || !this.state.room) {
-      return <div className='conversation'></div>;
-    }
-
-    var messages = this.state.room.history.map(function (msg) {
+    var messages = this.props.messages.map(function (msg) {
       return <Message value={msg} />
     })
 
