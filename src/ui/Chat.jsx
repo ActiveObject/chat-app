@@ -76,7 +76,8 @@ export default React.createClass({
     var msg = new Message({
       text: text,
       author: app.valueOf(currentUser),
-      time: new Date()
+      time: new Date(),
+      room: app.valueOf(activeRoom).id
     })
 
     var newDb = app.add(msg);

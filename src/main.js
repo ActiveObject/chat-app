@@ -65,19 +65,29 @@ var msg3 = new Message({
 });
 
 var room1 = new Room({
+  id: 1,
   members: Set.of(john, casey),
   history: List.of(msg1, msg2, msg3),
   isEnabledNotification: true
 });
 
 var room2 = new Room({
+  id: 2,
   members: Set.of(john, bejamin),
   history: List.of(msg1, msg2),
   isEnabledNotification: true
 });
 
 var room3 = new Room({
+  id: 3,
   members: Set.of(john, megan),
+  history: List.of(msg1, msg2),
+  isEnabledNotification: true
+});
+
+var room4 = new Room({
+  id: 4,
+  members: Set.of(megan, casey),
   history: List.of(msg1, msg2),
   isEnabledNotification: true
 });
@@ -94,11 +104,9 @@ React.render(React.createElement(AppContainer), document.getElementById('app'))
 
 vbus.push(app.add(room1))
 vbus.push(app.add(room2))
+vbus.push(app.add(room3))
+vbus.push(app.add({ type: ':app/active-room', room: room2 }))
 
 setTimeout(function() {
-  vbus.push(app.add(room3))
+  vbus.push(app.add(room4))
 }, 2000)
-
-setTimeout(function() {
-  vbus.push(app.add(room1))
-}, 4000)

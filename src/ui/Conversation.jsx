@@ -24,6 +24,14 @@ var Message = React.createClass({
 })
 
 export default React.createClass({
+  componentWillMount: function () {
+    this.unsub = app.listen(activeRoom, () => this.forceUpdate())
+  },
+
+  componentWillUnmount: function () {
+    this.unsub()
+  },
+
   render: function () {
     var room = app.valueOf(activeRoom)
     var history = room ? room.history : [];
