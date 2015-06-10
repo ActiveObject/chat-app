@@ -5,6 +5,11 @@ import vbus from 'app/vbus'
 import Room from 'app/values/Room'
 import User from 'app/values/User'
 import Message from 'app/values/Message'
+import app from 'app'
+
+import rooms from 'app/identities/rooms'
+import currentUser from 'app/identities/currentUser'
+import activeRoom from 'app/identities/activeRoom'
 
 import 'app/styles/main.css'
 import 'app/styles/app-container.css'
@@ -12,8 +17,6 @@ import 'app/styles/room-list-item.css'
 import 'app/styles/chat-search.css'
 import 'app/styles/new-message-view.css'
 import 'app/styles/message.css'
-
-React.render(React.createElement(AppContainer), document.getElementById('app'));
 
 var john = new User({
   nickname: 'john',
@@ -79,23 +82,23 @@ var room3 = new Room({
   isEnabledNotification: true
 });
 
-vbus.log();
+vbus.map(v => v.toJS()).log()
 
-vbus.push({
-  user: john,
-  rooms: [room1, room2]
-})
+app.addIdentity(rooms)
+app.addIdentity(currentUser)
+app.addIdentity(activeRoom)
+
+vbus.onValue(db => app.notify(db))
+
+React.render(React.createElement(AppContainer), document.getElementById('app'))
+
+vbus.push(app.add(room1))
+vbus.push(app.add(room2))
 
 setTimeout(function() {
-  vbus.push({
-    user: john,
-    rooms: [room1, room2, room3]
-  });
+  vbus.push(app.add(room3))
 }, 2000)
 
 setTimeout(function() {
-  vbus.push({
-    user: john,
-    rooms: [room1, room2, room3, room1]
-  });
-}, 3000)
+  vbus.push(app.add(room1))
+}, 4000)

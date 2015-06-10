@@ -1,5 +1,6 @@
 import React from 'react'
-import vbus from 'app/vbus'
+import app from 'app'
+import activeRoom from 'app/identities/activeRoom'
 
 var Message = React.createClass({
   render: function () {
@@ -24,8 +25,10 @@ var Message = React.createClass({
 
 export default React.createClass({
   render: function () {
-    var messages = this.props.messages.map(function (msg) {
-      return <Message value={msg} />
+    var room = app.valueOf(activeRoom)
+    var history = room ? room.history : [];
+    var messages = history.map(function (msg, i) {
+      return <Message key={i} value={msg} />
     })
 
     return (

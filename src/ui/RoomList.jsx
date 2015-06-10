@@ -1,6 +1,7 @@
 import React from 'react'
 import TransitionGroup from 'react/lib/ReactCSSTransitionGroup'
-import vbus from 'app/vbus'
+import app from 'app'
+import rooms from 'app/identities/rooms'
 import 'app/styles/transition/fadein.css'
 
 var RoomListItem = React.createClass({
@@ -18,7 +19,7 @@ var RoomListItem = React.createClass({
             <div className='room-list-item__members'>Corey and Frank</div>
             <div className='room-list-item__time'>2:49 pm</div>
           </div>
-          <div className='room-list-item__text'>I always thought it'd be nice if...</div>
+          <div className='room-list-item__text'>I always thought itd be nice if...</div>
         </div>
       </div>
     )
@@ -26,14 +27,8 @@ var RoomListItem = React.createClass({
 });
 
 export default React.createClass({
-  getInitialState: function() {
-    return {
-      rooms: []
-    }
-  },
-
   componentWillMount: function() {
-    this.unsub = vbus.onValue(app => this.setState({ rooms: app.rooms }));
+    this.unsub = app.listen(rooms, () => this.forceUpdate());
   },
 
   componentWillUnmount: function() {
@@ -41,13 +36,13 @@ export default React.createClass({
   },
 
   render: function() {
-    var rooms = this.state.rooms.map(function(room, i) {
+    var roomList = app.valueOf(rooms).map(function(room, i) {
       return <RoomListItem key={i} room={room} />;
     });
 
     return (
       <div className='room-list'>
-        <TransitionGroup transitionName='fadein'>{rooms}</TransitionGroup>
+        <TransitionGroup transitionName='fadein'>{roomList}</TransitionGroup>
       </div>
     );
   }
