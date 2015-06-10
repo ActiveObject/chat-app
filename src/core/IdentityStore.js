@@ -18,7 +18,7 @@ IdentityStore.prototype.listen = function(identity, callbackFn) {
 IdentityStore.prototype.add = function(v) {
   return this.identities.reduce(function(store, idRecord) {
     var identityState = store.get(idRecord.id);
-    var nextState = idRecord.next(identityState, v);
+    var nextState = idRecord.next(identityState, v, store);
     return store.set(idRecord.id, nextState);
   }, this.store);
 }
