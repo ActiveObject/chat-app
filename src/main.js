@@ -92,13 +92,14 @@ var room4 = new Room({
   isEnabledNotification: true
 });
 
-vbus.map(v => v.toJS()).log()
+vbus.map(changeRecord => changeRecord.value).log()
+vbus.map(changeRecord => changeRecord.db.toJS()).log()
 
 app.addIdentity(rooms)
 app.addIdentity(currentUser)
 app.addIdentity(activeRoom)
 
-vbus.onValue(db => app.notify(db))
+vbus.onValue(changeRecord => app.notify(changeRecord.db))
 
 React.render(React.createElement(AppContainer), document.getElementById('app'))
 
