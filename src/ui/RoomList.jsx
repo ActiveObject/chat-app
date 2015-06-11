@@ -42,7 +42,7 @@ var RoomListItem = React.createClass({
   },
 
   changeActiveRoom: function () {
-    vbus.push(app.add({ type: ':app/active-room', room: this.props.room }))
+    vbus.push(app.add({ tag: ':app/active-room', value: this.props.room }))
   }
 });
 

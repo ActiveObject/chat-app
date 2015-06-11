@@ -1,4 +1,5 @@
 import merge from 'app/fn/merge'
+import Message from 'app/values/Message'
 
 function Room(attrs) {
   this.id = attrs.id;
@@ -8,9 +9,13 @@ function Room(attrs) {
 }
 
 Room.prototype.addMessage = function(msg) {
-  return this.modify({
-    history: this.history.concat(msg)
-  })
+  if (msg.room === this.id) {
+    return this.modify({
+      history: this.history.concat(new Message(msg))
+    })
+  }
+
+  return this
 }
 
 Room.prototype.modify = function(attrs) {

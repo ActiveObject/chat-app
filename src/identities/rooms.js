@@ -1,20 +1,21 @@
 import { createIdentity } from 'app/core/IdentityStore'
+import tagOf from 'app/fn/tagOf'
 import Room from 'app/values/Room'
 import Message from 'app/values/Message'
 
 export default createIdentity(':app/rooms', [], function(xs, v) {
-  if (v instanceof Room) {
+  if (tagOf(v) === ':app/room') {
     var ids = xs.map(room => room.id)
 
     if (ids.indexOf(v.id) !== -1) {
-      return xs.map(room => room.id === v.id ? v : room)
+      return xs.map(room => room.id === v.id ? new Room(v) : room)
     }
 
-    return xs.concat(v)
+    return xs.concat(new Room(v))
   }
 
-  if (v instanceof Message) {
-    return xs.map(room => v.room === room.id ? room.addMessage(v) : room)
+  if (tagOf(v) === ':app/message') {
+    return xs.map(room => room.addMessage(v))
   }
 
   return xs

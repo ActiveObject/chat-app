@@ -1,18 +1,15 @@
 import { createIdentity } from 'app/core/IdentityStore'
 import Message from 'app/values/Message'
 import Room from 'app/values/Room'
+import tagOf from 'app/fn/tagOf'
 
 export default createIdentity(':app/active-room', null, function(activeRoom, v) {
-  if (v.type === ':app/active-room') {
-    return v.room
+  if (tagOf(v) === ':app/active-room') {
+    return new Room(v.value)
   }
 
-  if (v instanceof Message) {
+  if (tagOf(v) === ':app/message') {
     return activeRoom.addMessage(v)
-  }
-
-  if (v instanceof Room && activeRoom && activeRoom.id === v.id) {
-    return v
   }
 
   return activeRoom

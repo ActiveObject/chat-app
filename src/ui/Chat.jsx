@@ -1,8 +1,5 @@
 import IScroll from 'iscroll/build/iscroll'
 import vbus from 'app/vbus'
-import Message from 'app/values/Message'
-import Room from 'app/values/Room'
-import User from 'app/values/User'
 import Conversation from 'app/ui/Conversation'
 import NewMessageView from 'app/ui/NewMessageView'
 import app from 'app'
@@ -73,14 +70,13 @@ export default React.createClass({
   },
 
   sendMessage: function(text) {
-    var msg = new Message({
+    var newDb = app.add({
+      tag: ':app/message',
       text: text,
       author: app.valueOf(currentUser),
       time: new Date(),
       room: app.valueOf(activeRoom).id
-    })
-
-    var newDb = app.add(msg);
+    });
 
     vbus.push(newDb);
   }
