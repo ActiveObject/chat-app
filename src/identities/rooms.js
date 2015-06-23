@@ -1,5 +1,5 @@
 import { createIdentity } from 'app/core/IdentityStore'
-import tagOf from 'app/fn/tagOf'
+import tagOf from 'app/core/tagOf'
 import Room from 'app/values/Room'
 import Message from 'app/values/Message'
 

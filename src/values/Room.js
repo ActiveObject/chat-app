@@ -1,4 +1,4 @@
-import merge from 'app/fn/merge'
+import merge from 'app/core/merge'
 import Message from 'app/values/Message'
 import RoomListItem from 'app/ui/RoomListItem'
 

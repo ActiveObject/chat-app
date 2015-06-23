@@ -1,5 +1,5 @@
 import { createIdentity } from 'app/core/IdentityStore'
-import tagOf from 'app/fn/tagOf'
+import tagOf from 'app/core/tagOf'
 import User from 'app/values/User'
 
 var john = new User({
