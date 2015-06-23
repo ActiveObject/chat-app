@@ -47,35 +47,11 @@ var megan = {
   picture: 'https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/48.jpg'
 }
 
-var msg1 = {
-  tag: ':app/message',
-  text: 'Happy New Year!',
-  author: john,
-  time: new Date('2015-01-01T00:00:02Z'),
-  room: 1
-}
-
-var msg2 = {
-  tag: ':app/message',
-  text: 'Happy New Year too!',
-  author: casey,
-  time: new Date('2015-01-01T00:10:00Z'),
-  room: 1
-}
-
-var msg3 = {
-  tag: ':app/message',
-  text: 'In Back to the Future, Doc states that the time machine is electrical but that he needs a nuclear reaction (produced by plutioum stolen from a group of Libyan terroists) to generate the 1.21 gigawatts of electricity needed.',
-  author: john,
-  time: new Date('2015-01-01T00:10:00Z'),
-  room: 1
-}
-
 var room1 = {
   tag: ':app/room',
   id: 1,
   members: Set.of(john, casey),
-  history: List.of(msg1, msg2, msg3),
+  history: List(),
   isEnabledNotification: true,
 }
 
@@ -83,7 +59,7 @@ var room2 = {
   tag: ':app/room',
   id: 2,
   members: Set.of(john, bejamin),
-  history: List.of(msg1, msg2),
+  history: List(),
   isEnabledNotification: true
 }
 
@@ -91,7 +67,7 @@ var room3 = {
   tag: ':app/room',
   id: 3,
   members: Set.of(john, megan),
-  history: List.of(msg1, msg2),
+  history: List(),
   isEnabledNotification: true
 }
 
@@ -99,7 +75,7 @@ var room4 = {
   tag: ':app/room',
   id: 4,
   members: Set.of(megan, casey),
-  history: List.of(msg1, msg2),
+  history: List(),
   isEnabledNotification: true
 }
 
@@ -118,6 +94,38 @@ vbus.push(app.add(room1))
 vbus.push(app.add(room2))
 vbus.push(app.add(room3))
 vbus.push(app.add({ tag: ':app/active-room', value: room2 }))
+
+vbus.push(app.add({
+  tag: ':app/message',
+  text: 'Happy New Year!',
+  author: john,
+  time: new Date('2015-01-01T00:00:02Z'),
+  room: 1
+}))
+
+vbus.push(app.add({
+  tag: ':app/message',
+  text: 'Happy New Year too!',
+  author: casey,
+  time: new Date('2015-01-01T00:10:00Z'),
+  room: 1
+}))
+
+vbus.push(app.add({
+  tag: ':app/message',
+  text: 'In Back to the Future, Doc states that the time machine is electrical but that he needs a nuclear reaction (produced by plutioum stolen from a group of Libyan terroists) to generate the 1.21 gigawatts of electricity needed.',
+  author: john,
+  time: new Date('2015-01-01T00:10:00Z'),
+  room: 1
+}))
+
+vbus.push(app.add({
+  tag: ':app/message',
+  text: 'In Back to the Future, Doc states that the time machine is electrical but that he needs a nuclear reaction (produced by plutioum stolen from a group of Libyan terroists) to generate the 1.21 gigawatts of electricity needed.',
+  author: john,
+  time: new Date('2015-01-01T00:10:00Z'),
+  room: 2
+}))
 
 setTimeout(function() {
   vbus.push(app.add(room4))

@@ -11,7 +11,7 @@ function Message(attrs) {
 Message.prototype.render = function (key) {
   return React.createElement(MessageView, {
     key: key,
-    msg: this
+    value: this
   })
 }
 
