@@ -1,5 +1,6 @@
 import merge from 'app/fn/merge'
 import Message from 'app/values/Message'
+import RoomListItem from 'app/ui/RoomListItem'
 
 function Room(attrs) {
   this.id = attrs.id;
@@ -16,6 +17,13 @@ Room.prototype.addMessage = function(msg) {
   }
 
   return this
+}
+
+Room.prototype.renderListItem = function (key) {
+  return React.createElement(RoomListItem, {
+    key: key,
+    room: this
+  })
 }
 
 Room.prototype.modify = function(attrs) {
