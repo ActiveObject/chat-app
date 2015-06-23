@@ -39,6 +39,6 @@ export default React.createClass({
   },
 
   changeActiveRoom: function () {
-    vbus.push(app.add({ tag: ':app/active-room', value: this.props.room }))
+    vbus.push(app.add(this.props.room.activate()))
   }
 });

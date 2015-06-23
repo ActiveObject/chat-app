@@ -19,6 +19,13 @@ Room.prototype.addMessage = function(msg) {
   return this
 }
 
+Room.prototype.activate = function () {
+  return {
+    tag: ':app/active-room',
+    value: this
+  }
+}
+
 Room.prototype.renderListItem = function (key) {
   return React.createElement(RoomListItem, {
     key: key,
