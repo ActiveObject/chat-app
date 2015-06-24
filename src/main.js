@@ -15,6 +15,17 @@ import 'app/styles/chat-search.css'
 import 'app/styles/new-message-view.css'
 import 'app/styles/message.css'
 
+vbus.map(changeRecord => changeRecord.value).log('value')
+vbus.map(changeRecord => changeRecord.db.toJS()).log('db')
+
+app.addIdentity(rooms)
+app.addIdentity(currentUser)
+app.addIdentity(activeRoom)
+
+vbus.onValue(changeRecord => app.notify(changeRecord.db))
+
+React.render(React.createElement(AppContainer), document.getElementById('app'))
+
 var john = {
   tag: ':app/user',
   nickname: 'john',
@@ -47,53 +58,40 @@ var megan = {
   picture: 'https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/48.jpg'
 }
 
-var room1 = {
+vbus.push(app.add({
   tag: ':app/room',
   id: 1,
   members: Set.of(john, casey),
   history: List(),
   isEnabledNotification: true,
-}
+}))
 
-var room2 = {
+vbus.push(app.add({
   tag: ':app/room',
   id: 2,
   members: Set.of(john, bejamin),
   history: List(),
   isEnabledNotification: true
-}
+}))
 
-var room3 = {
+vbus.push(app.add({
   tag: ':app/room',
   id: 3,
   members: Set.of(john, megan),
   history: List(),
   isEnabledNotification: true
-}
+}))
 
-var room4 = {
-  tag: ':app/room',
-  id: 4,
-  members: Set.of(megan, casey),
-  history: List(),
-  isEnabledNotification: true
-}
-
-vbus.map(changeRecord => changeRecord.value).log('value')
-vbus.map(changeRecord => changeRecord.db.toJS()).log('db')
-
-app.addIdentity(rooms)
-app.addIdentity(currentUser)
-app.addIdentity(activeRoom)
-
-vbus.onValue(changeRecord => app.notify(changeRecord.db))
-
-React.render(React.createElement(AppContainer), document.getElementById('app'))
-
-vbus.push(app.add(room1))
-vbus.push(app.add(room2))
-vbus.push(app.add(room3))
-vbus.push(app.add({ tag: ':app/active-room', value: room2 }))
+vbus.push(app.add({
+  tag: ':app/active-room',
+  value: {
+    tag: ':app/room',
+    id: 2,
+    members: Set.of(megan, casey),
+    history: List(),
+    isEnabledNotification: true
+  }
+}))
 
 vbus.push(app.add({
   tag: ':app/message',
@@ -128,5 +126,11 @@ vbus.push(app.add({
 }))
 
 setTimeout(function() {
-  vbus.push(app.add(room4))
+  vbus.push(app.add({
+    tag: ':app/room',
+    id: 4,
+    members: Set.of(megan, casey),
+    history: List(),
+    isEnabledNotification: true
+  }))
 }, 2000)
