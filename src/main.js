@@ -1,8 +1,9 @@
 import React from 'react'
-import {Set, List} from 'immutable'
+import {Set, List, Map} from 'immutable'
 import AppContainer from 'app/ui/AppContainer'
 import vbus from 'app/vbus'
 import app from 'app'
+import log, { IConsoleLog } from 'app/core/log'
 
 import rooms from 'app/identities/rooms'
 import currentUser from 'app/identities/currentUser'
@@ -15,8 +16,12 @@ import 'app/styles/chat-search.css'
 import 'app/styles/new-message-view.css'
 import 'app/styles/message.css'
 
-vbus.map(changeRecord => changeRecord.value).log('value')
-vbus.map(changeRecord => changeRecord.db.toJS()).log('db')
+Map.prototype[IConsoleLog] = function () {
+  return ['Immutable.Map', this.toJS()]
+}
+
+vbus.map(changeRecord => changeRecord.value).onValue(log)
+vbus.map(changeRecord => changeRecord.db).onValue(log)
 
 app.addIdentity(rooms)
 app.addIdentity(currentUser)
