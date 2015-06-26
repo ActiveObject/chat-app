@@ -3,6 +3,7 @@ import cx from 'classnames'
 import app from 'app'
 import vbus from 'app/vbus'
 import activeRoom from 'app/identities/activeRoom'
+import * as Room from 'app/values/Room'
 
 export default React.createClass({
   componentWillMount: function () {
@@ -39,6 +40,6 @@ export default React.createClass({
   },
 
   changeActiveRoom: function () {
-    vbus.push(app.add(this.props.room.activate()))
+    vbus.push(app.add(Room.activate(this.props.room)))
   }
 });

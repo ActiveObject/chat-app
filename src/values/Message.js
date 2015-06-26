@@ -1,18 +1,9 @@
 import React from 'react'
-import MessageView from 'app/ui/Message'
+import Message from 'app/ui/Message'
 
-function Message(attrs) {
-  this.text = attrs.text
-  this.author = attrs.author
-  this.time = attrs.time
-  this.room = attrs.room
-}
-
-Message.prototype.render = function (key) {
-  return React.createElement(MessageView, {
-    key: key,
-    value: this
+export function render(msg) {
+  return React.createElement(Message, {
+    key: msg.id,
+    value: msg
   })
 }
-
-export default Message
