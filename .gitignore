@@ -27,5 +27,7 @@ build/Release
 node_modules/*
 !node_modules/app
 
+.DS_Store
+
 _public
 .divshot-cache
