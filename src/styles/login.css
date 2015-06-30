@@ -1,0 +1,21 @@
+.login {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login__image {
+  margin: 30px;
+}
+
+.login__text {
+  font-weight: 300;
+}
+
+.login__text:hover {
+  color: #6c71c4;
+  cursor: pointer;
+}

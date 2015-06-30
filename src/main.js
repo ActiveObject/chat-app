@@ -14,6 +14,7 @@ import 'app/styles/room-list-item.css'
 import 'app/styles/chat-search.css'
 import 'app/styles/new-message-view.css'
 import 'app/styles/message.css'
+import 'app/styles/login.css'
 
 vbus.map(changeRecord => changeRecord.value).log('value')
 vbus.map(changeRecord => changeRecord.db.toJS()).log('db')
