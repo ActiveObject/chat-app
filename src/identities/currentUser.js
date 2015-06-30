@@ -1,18 +1,16 @@
 import { createIdentity } from 'app/core/IdentityStore'
 import tagOf from 'app/core/tagOf'
-import User from 'app/values/User'
 
-var john = new User({
-  nickname: 'john',
-  firstName: 'Johnes',
-  lastName: 'James',
-  picture: 'https://s3.amazonaws.com/uifaces/faces/twitter/mattchevy/48.jpg'
-});
+let unauthenticated = {
+  tag: ':app/user',
+  status: 'unauthenticated',
+  current: true
+}
 
-export default createIdentity(':app/currentUser', john, function(currentUser, v) {
-  if (tagOf(v) === ':app/user' && v.nickname === user.nickname) {
-    return new User(v);
+export default createIdentity(':app/currentUser', unauthenticated, function(currentUser, v) {
+  if (tagOf(v) === ':app/user' && v.isCurrent) {
+    return v
   }
 
-  return currentUser;
+  return currentUser
 })
