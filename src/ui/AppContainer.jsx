@@ -3,6 +3,10 @@ import app from 'app'
 import RoomList from 'app/ui/RoomList'
 import Chat from 'app/ui/Chat'
 import currentUser from 'app/identities/currentUser'
+import Firebase from 'firebase'
+import vbus from 'app/vbus'
+
+let dbRef = new Firebase('https://ac-chat-app.firebaseio.com')
 
 var ChatSearch = React.createClass({
   render: function () {
@@ -21,11 +25,29 @@ var Login = React.createClass({
         <div className='login__image'>
           <img src='images/github.png' width={128} height={128} />
         </div>
-        <span className='login__text'>
+        <span className='login__text' onClick={this.auth}>
           Login with your github account
         </span>
       </div>
     )
+  },
+
+  auth: function () {
+    dbRef.authWithOAuthPopup('github', function (err, authData) {
+      if (err) {
+        return console.log(err)
+      }
+
+      vbus.push(app.add({
+        tag: ':app/user',
+        isCurrent: true,
+        uid: authData.uid,
+        username: authData.github.username,
+        displayName: authData.github.displayName,
+        profile: authData.github.cachedUserProfile,
+        email: authData.github.email
+      }))
+    });
   }
 })
 
