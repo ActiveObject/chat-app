@@ -3,10 +3,8 @@ import app from 'app'
 import RoomList from 'app/ui/RoomList'
 import Chat from 'app/ui/Chat'
 import currentUser from 'app/identities/currentUser'
-import Firebase from 'firebase'
 import vbus from 'app/vbus'
-
-let dbRef = new Firebase('https://ac-chat-app.firebaseio.com')
+import * as Github from 'app/github'
 
 var ChatSearch = React.createClass({
   render: function () {
@@ -33,21 +31,9 @@ var Login = React.createClass({
   },
 
   auth: function () {
-    dbRef.authWithOAuthPopup('github', function (err, authData) {
-      if (err) {
-        return console.log(err)
-      }
-
-      vbus.push(app.add({
-        tag: ':app/user',
-        isCurrent: true,
-        uid: authData.uid,
-        username: authData.github.username,
-        displayName: authData.github.displayName,
-        profile: authData.github.cachedUserProfile,
-        email: authData.github.email
-      }))
-    });
+    Github.auth(app)
+      .then(user => vbus.push(app.add(user)))
+      .catch(err => console.log(err))
   }
 })
 
