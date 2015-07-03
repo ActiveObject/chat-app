@@ -1,7 +1,6 @@
 import React from 'react'
 import cx from 'classnames'
 import app from 'app'
-import vbus from 'app/vbus'
 import activeRoom from 'app/identities/activeRoom'
 import * as Room from 'app/values/Room'
 

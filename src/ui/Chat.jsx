@@ -1,5 +1,4 @@
 import IScroll from 'iscroll/build/iscroll'
-import vbus from 'app/vbus'
 import Conversation from 'app/ui/Conversation'
 import NewMessageView from 'app/ui/NewMessageView'
 import app from 'app'

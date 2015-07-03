@@ -3,7 +3,6 @@ import app from 'app'
 import RoomList from 'app/ui/RoomList'
 import Chat from 'app/ui/Chat'
 import currentUser from 'app/identities/currentUser'
-import vbus from 'app/vbus'
 import * as Github from 'app/github'
 
 var ChatSearch = React.createClass({

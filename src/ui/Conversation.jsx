@@ -1,5 +1,4 @@
 import React from 'react'
-import app from 'app'
 import activeRoom from 'app/identities/activeRoom'
 import * as Message from 'app/values/Message'
 

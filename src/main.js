@@ -1,8 +1,8 @@
 import React from 'react'
 import {Set, List} from 'immutable'
 import AppContainer from 'app/ui/AppContainer'
-import vbus from 'app/vbus'
 import app from 'app'
+import System from 'app/system'
 
 import 'app/styles/main.css'
 import 'app/styles/app-container.css'
@@ -12,12 +12,14 @@ import 'app/styles/new-message-view.css'
 import 'app/styles/message.css'
 import 'app/styles/login.css'
 
-vbus.map(changeRecord => changeRecord.value).log('value')
-vbus.map(changeRecord => changeRecord.db.toJS()).log('db')
+// vbus.map(changeRecord => changeRecord.value).log('value')
+// vbus.map(changeRecord => changeRecord.db.toJS()).log('db')
 
-vbus.onValue(changeRecord => app.notify(changeRecord.db))
+var system = new System({
+  firebase: 'https://ac-chat-app.firebaseio.com'
+})
 
-React.render(React.createElement(AppContainer), document.getElementById('app'))
+app.start(system)
 
 var john = {
   tag: ':app/user',
@@ -51,79 +53,98 @@ var megan = {
   picture: 'https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/48.jpg'
 }
 
-vbus.push(app.add({
-  tag: ':app/room',
-  id: 1,
-  members: Set.of(john, casey),
-  history: List(),
-  isEnabledNotification: true,
-}))
+// app(function (system) {
+//   notify(system, add(system, {
+//     tag: ':app/room',
+//     id: 1,
+//     members: Set.of(john, casey),
+//     history: List(),
+//     isEnabledNotification: true,
+//   }))
+// })
 
-vbus.push(app.add({
-  tag: ':app/room',
-  id: 2,
-  members: Set.of(john, bejamin),
-  history: List(),
-  isEnabledNotification: true
-}))
+// notify(app, add(app, {
+//   tag: ':app/room',
+//   id: 1,
+//   members: Set.of(john, casey),
+//   history: List(),
+//   isEnabledNotification: true
+// }))
 
-vbus.push(app.add({
-  tag: ':app/room',
-  id: 3,
-  members: Set.of(john, megan),
-  history: List(),
-  isEnabledNotification: true
-}))
 
-vbus.push(app.add({
-  tag: ':app/active-room',
-  value: {
-    tag: ':app/room',
-    id: 2,
-    members: Set.of(megan, casey),
-    history: List(),
-    isEnabledNotification: true
-  }
-}))
+// vbus.push(app.add({
+//   tag: ':app/room',
+//   id: 1,
+//   members: Set.of(john, casey),
+//   history: List(),
+//   isEnabledNotification: true,
+// }))
 
-vbus.push(app.add({
-  tag: ':app/message',
-  text: 'Happy New Year!',
-  author: john,
-  time: new Date('2015-01-01T00:00:02Z'),
-  room: 1
-}))
+// vbus.push(app.add({
+//   tag: ':app/room',
+//   id: 2,
+//   members: Set.of(john, bejamin),
+//   history: List(),
+//   isEnabledNotification: true
+// }))
 
-vbus.push(app.add({
-  tag: ':app/message',
-  text: 'Happy New Year too!',
-  author: casey,
-  time: new Date('2015-01-01T00:10:00Z'),
-  room: 1
-}))
+// vbus.push(app.add({
+//   tag: ':app/room',
+//   id: 3,
+//   members: Set.of(john, megan),
+//   history: List(),
+//   isEnabledNotification: true
+// }))
 
-vbus.push(app.add({
-  tag: ':app/message',
-  text: 'In Back to the Future, Doc states that the time machine is electrical but that he needs a nuclear reaction (produced by plutioum stolen from a group of Libyan terroists) to generate the 1.21 gigawatts of electricity needed.',
-  author: john,
-  time: new Date('2015-01-01T00:10:00Z'),
-  room: 1
-}))
+// vbus.push(app.add({
+//   tag: ':app/active-room',
+//   value: {
+//     tag: ':app/room',
+//     id: 2,
+//     members: Set.of(megan, casey),
+//     history: List(),
+//     isEnabledNotification: true
+//   }
+// }))
 
-vbus.push(app.add({
-  tag: ':app/message',
-  text: 'In Back to the Future, Doc states that the time machine is electrical but that he needs a nuclear reaction (produced by plutioum stolen from a group of Libyan terroists) to generate the 1.21 gigawatts of electricity needed.',
-  author: john,
-  time: new Date('2015-01-01T00:10:00Z'),
-  room: 2
-}))
+// vbus.push(app.add({
+//   tag: ':app/message',
+//   text: 'Happy New Year!',
+//   author: john,
+//   time: new Date('2015-01-01T00:00:02Z'),
+//   room: 1
+// }))
 
-setTimeout(function() {
-  vbus.push(app.add({
-    tag: ':app/room',
-    id: 4,
-    members: Set.of(megan, casey),
-    history: List(),
-    isEnabledNotification: true
-  }))
-}, 2000)
+// vbus.push(app.add({
+//   tag: ':app/message',
+//   text: 'Happy New Year too!',
+//   author: casey,
+//   time: new Date('2015-01-01T00:10:00Z'),
+//   room: 1
+// }))
+
+// vbus.push(app.add({
+//   tag: ':app/message',
+//   text: 'In Back to the Future, Doc states that the time machine is electrical but that he needs a nuclear reaction (produced by plutioum stolen from a group of Libyan terroists) to generate the 1.21 gigawatts of electricity needed.',
+//   author: john,
+//   time: new Date('2015-01-01T00:10:00Z'),
+//   room: 1
+// }))
+
+// vbus.push(app.add({
+//   tag: ':app/message',
+//   text: 'In Back to the Future, Doc states that the time machine is electrical but that he needs a nuclear reaction (produced by plutioum stolen from a group of Libyan terroists) to generate the 1.21 gigawatts of electricity needed.',
+//   author: john,
+//   time: new Date('2015-01-01T00:10:00Z'),
+//   room: 2
+// }))
+
+// setTimeout(function() {
+//   vbus.push(app.add({
+//     tag: ':app/room',
+//     id: 4,
+//     members: Set.of(megan, casey),
+//     history: List(),
+//     isEnabledNotification: true
+//   }))
+// }, 2000)
