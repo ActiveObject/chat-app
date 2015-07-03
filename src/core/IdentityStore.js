@@ -1,12 +1,15 @@
-function IdentityStore(valueMap) {
-  this.identities = []
-  this.callbacks = []
-  this.valueMap = valueMap
+function IdentityStore(attrs) {
+  this.identities = attrs.identities
+  this.callbacks = attrs.callbacks
+  this.valueMap = attrs.valueMap
 }
 
 IdentityStore.prototype.addIdentity = function(v) {
-  this.identities.push(v)
-  this.valueMap = this.valueMap.set(v.id, v.seed)
+  return new IdentityStore({
+    identities: this.identities.concat(v),
+    valueMap: this.valueMap.set(v.id, v.seed),
+    callbacks: this.callbacks
+  })
 };
 
 IdentityStore.prototype.listen = function(identity, callbackFn) {
@@ -34,7 +37,11 @@ IdentityStore.prototype.notify = function(dbValue) {
 }
 
 export function createStore(valueMap) {
-  return new IdentityStore(valueMap)
+  return new IdentityStore({
+    identities: [],
+    callbacks: [],
+    valueMap: valueMap
+  })
 }
 
 export function createIdentity(id, seed, next) {

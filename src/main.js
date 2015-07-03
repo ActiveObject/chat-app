@@ -4,10 +4,6 @@ import AppContainer from 'app/ui/AppContainer'
 import vbus from 'app/vbus'
 import app from 'app'
 
-import rooms from 'app/identities/rooms'
-import currentUser from 'app/identities/currentUser'
-import activeRoom from 'app/identities/activeRoom'
-
 import 'app/styles/main.css'
 import 'app/styles/app-container.css'
 import 'app/styles/room-list-item.css'
@@ -16,13 +12,8 @@ import 'app/styles/new-message-view.css'
 import 'app/styles/message.css'
 import 'app/styles/login.css'
 
-
 vbus.map(changeRecord => changeRecord.value).log('value')
 vbus.map(changeRecord => changeRecord.db.toJS()).log('db')
-
-app.addIdentity(rooms)
-app.addIdentity(currentUser)
-app.addIdentity(activeRoom)
 
 vbus.onValue(changeRecord => app.notify(changeRecord.db))
 
