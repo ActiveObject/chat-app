@@ -4,7 +4,9 @@ import { Map } from 'immutable'
 import Firebase from 'firebase'
 import { createStore } from 'app/core/IdentityStore'
 import * as Github from 'app/github'
-import * as Runtime from 'app/core/runtime'
+import * as Runtime from 'app/core/Runtime'
+import * as IdentityStore from 'app/core/IdentityStore'
+import AppContainer from 'app/ui/AppContainer'
 
 import rooms from 'app/identities/rooms'
 import currentUser from 'app/identities/currentUser'
@@ -16,11 +18,19 @@ function System(config) {
 
 System.prototype[Runtime.IStart] = function () {
   this.dbRef = new Firebase(this.firebase)
-  this[ICallbackStore] = []
-  this[IVmap] = Map()
-  this[IIdentities] = [rooms, currentUser, activeRoom]
-  this[IVbus] = new Bacon.Bus()
-  this.unsub = this[IVbus].onValue(changeRecord => app.notify(changeRecord.db))
+  this[IdentityStore.ICallbackStore] = []
+  this[IdentityStore.IVmap] = Map({
+    ':app/rooms': [],
+    ':app/currentUser': {
+      tag: ':app/user',
+      status: 'unauthenticated',
+      current: true
+    },
+    ':app/activeRoom': null
+  })
+  this[IdentityStore.IIdentityStore] = [rooms, currentUser, activeRoom]
+  this.vbus = new Bacon.Bus()
+  this.unsub = this.vbus.onValue(changeRecord => IdentityStore.notify(this, changeRecord.db))
   React.render(React.createElement(AppContainer), document.getElementById('app'))
 }
 
@@ -28,7 +38,13 @@ System.prototype[Runtime.IStop] = function () {
   this.unsub()
 }
 
+System.prototype[Runtime.IPush] = function (v) {
+  this.vbus.push(v)
+}
+
 System.prototype[Github.IAuth] = function () {
+  var dbRef = this.dbRef
+
   return new Promise(function (resolve, reject) {
     dbRef.authWithOAuthPopup('github', function (err, authData) {
       if (err) {

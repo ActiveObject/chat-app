@@ -1,10 +1,12 @@
 import React from 'react'
 import activeRoom from 'app/identities/activeRoom'
 import * as Message from 'app/values/Message'
+import { add, addWatch, valueOf } from 'app/core/IdentityStore'
+import app from 'app'
 
 export default React.createClass({
   componentWillMount: function () {
-    this.unsub = app.listen(activeRoom, () => this.forceUpdate())
+    this.unsub = addWatch(app, activeRoom, () => this.forceUpdate())
   },
 
   componentWillUnmount: function () {
@@ -12,7 +14,7 @@ export default React.createClass({
   },
 
   render: function () {
-    var room = app.valueOf(activeRoom)
+    var room = valueOf(app, activeRoom)
     var history = room ? room.history : []
     var messages = history.map(Message.render)
 

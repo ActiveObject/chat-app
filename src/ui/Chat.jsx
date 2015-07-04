@@ -2,6 +2,8 @@ import IScroll from 'iscroll/build/iscroll'
 import Conversation from 'app/ui/Conversation'
 import NewMessageView from 'app/ui/NewMessageView'
 import app from 'app'
+import { add, addWatch, valueOf } from 'app/core/IdentityStore'
+import { push } from 'app/core/Runtime'
 
 import currentUser from 'app/identities/currentUser'
 import activeRoom from 'app/identities/activeRoom'
@@ -36,19 +38,17 @@ var ScrollLayer = React.createClass({
 
 export default React.createClass({
   componentWillMount: function () {
-    this.unsub = vbus.onValue(app => this.setState({ app: app }))
-    this.release = app.listen(activeRoom, () => this.forceUpdate());
-    this.release2 = app.listen(currentUser, () => this.forceUpdate());
+    this.release = addWatch(app, activeRoom, () => this.forceUpdate());
+    this.release2 = addWatch(app, currentUser, () => this.forceUpdate());
   },
 
   componentWillUnmount: function () {
-    this.unsub()
     this.release()
     this.release2()
   },
 
   render: function() {
-    var room = app.valueOf(activeRoom);
+    var room = valueOf(app, activeRoom);
     var messages = room ? room.history : [];
 
     return (
@@ -69,14 +69,14 @@ export default React.createClass({
   },
 
   sendMessage: function(text) {
-    var newDb = app.add({
+    var newDb = add(app, {
       tag: ':app/message',
       text: text,
-      author: app.valueOf(currentUser),
+      author: valueOf(app, currentUser),
       time: new Date(),
-      room: app.valueOf(activeRoom).id
-    });
+      room: valueOf(app, activeRoom).id
+    })
 
-    vbus.push(newDb);
+    push(app, newDb)
   }
 })

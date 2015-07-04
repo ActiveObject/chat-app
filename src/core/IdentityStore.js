@@ -1,48 +1,7 @@
-function IdentityStore(attrs) {
-  this.identities = attrs.identities
-  this.callbacks = attrs.callbacks
-  this.valueMap = attrs.valueMap
-}
+export var IVmap = Symbol('IdentityStore.IVmap')
+export var IIdentityStore = Symbol('IdentityStore.IIdentityStore')
+export var ICallbackStore = Symbol('IdentityStore.ICallbackStore')
 
-IdentityStore.prototype.addIdentity = function(v) {
-  return new IdentityStore({
-    identities: this.identities.concat(v),
-    valueMap: this.valueMap.set(v.id, v.seed),
-    callbacks: this.callbacks
-  })
-};
-
-IdentityStore.prototype.listen = function(identity, callbackFn) {
-  this.callbacks.push([identity.id, callbackFn])
-}
-
-IdentityStore.prototype.add = function(v) {
-  return {
-    value: v,
-    db: this.identities.reduce(function(valueMap, idRecord) {
-      var identityState = valueMap.get(idRecord.id);
-      var nextState = idRecord.next(identityState, v, valueMap);
-      return valueMap.set(idRecord.id, nextState);
-    }, this.valueMap)
-  }
-}
-
-IdentityStore.prototype.valueOf = function(identity, defValue) {
-  return this.valueMap.get(identity.id, defValue)
-}
-
-IdentityStore.prototype.notify = function(dbValue) {
-  this.valueMap = dbValue
-  this.callbacks.forEach(cbRecord => cbRecord[1](this.valueMap.get(cbRecord[0])));
-}
-
-export function createStore(valueMap) {
-  return new IdentityStore({
-    identities: [],
-    callbacks: [],
-    valueMap: valueMap
-  })
-}
 
 export function createIdentity(id, seed, next) {
   return {
@@ -50,4 +9,32 @@ export function createIdentity(id, seed, next) {
     seed: seed,
     next: next
   }
+}
+
+export function add(target, v) {
+  var vmap = target[IVmap]
+  var identities = target[IIdentityStore]
+
+  return {
+    value: v,
+    db: identities.reduce(function(valueMap, idRecord) {
+      var identityState = valueMap.get(idRecord.id)
+      var nextState = idRecord.next(identityState, v, valueMap)
+
+      return valueMap.set(idRecord.id, nextState)
+    }, vmap)
+  }
+}
+
+export function addWatch(target, identity, callback) {
+  target[ICallbackStore].push([identity.id, callback])
+}
+
+export function notify(target, vmap) {
+  target[IVmap] = vmap
+  target[ICallbackStore].forEach(cbRecord => cbRecord[1](vmap.get(cbRecord[0])))
+}
+
+export function valueOf(target, identity, defValue) {
+  return target[IVmap].get(identity.id, defValue)
 }

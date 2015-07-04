@@ -1,8 +1,8 @@
-import React from 'react'
 import {Set, List} from 'immutable'
-import AppContainer from 'app/ui/AppContainer'
 import app from 'app'
 import System from 'app/system'
+import { push } from 'app/core/Runtime'
+import { add } from 'app/core/IdentityStore'
 
 import 'app/styles/main.css'
 import 'app/styles/app-container.css'
@@ -53,34 +53,16 @@ var megan = {
   picture: 'https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/48.jpg'
 }
 
-// app(function (system) {
-//   notify(system, add(system, {
-//     tag: ':app/room',
-//     id: 1,
-//     members: Set.of(john, casey),
-//     history: List(),
-//     isEnabledNotification: true,
-//   }))
-// })
 
-// notify(app, add(app, {
-//   tag: ':app/room',
-//   id: 1,
-//   members: Set.of(john, casey),
-//   history: List(),
-//   isEnabledNotification: true
-// }))
+push(app, add(app, {
+  tag: ':app/room',
+  id: 1,
+  members: Set.of(john, casey),
+  history: List(),
+  isEnabledNotification: true,
+}))
 
-
-// vbus.push(app.add({
-//   tag: ':app/room',
-//   id: 1,
-//   members: Set.of(john, casey),
-//   history: List(),
-//   isEnabledNotification: true,
-// }))
-
-// vbus.push(app.add({
+// vbus.push(add(app, ({
 //   tag: ':app/room',
 //   id: 2,
 //   members: Set.of(john, bejamin),
@@ -88,7 +70,7 @@ var megan = {
 //   isEnabledNotification: true
 // }))
 
-// vbus.push(app.add({
+// vbus.push(add(app, ({
 //   tag: ':app/room',
 //   id: 3,
 //   members: Set.of(john, megan),
@@ -96,7 +78,7 @@ var megan = {
 //   isEnabledNotification: true
 // }))
 
-// vbus.push(app.add({
+// vbus.push(add(app, ({
 //   tag: ':app/active-room',
 //   value: {
 //     tag: ':app/room',
@@ -107,7 +89,7 @@ var megan = {
 //   }
 // }))
 
-// vbus.push(app.add({
+// vbus.push(add(app, ({
 //   tag: ':app/message',
 //   text: 'Happy New Year!',
 //   author: john,
@@ -115,7 +97,7 @@ var megan = {
 //   room: 1
 // }))
 
-// vbus.push(app.add({
+// vbus.push(add(app, ({
 //   tag: ':app/message',
 //   text: 'Happy New Year too!',
 //   author: casey,
@@ -123,7 +105,7 @@ var megan = {
 //   room: 1
 // }))
 
-// vbus.push(app.add({
+// vbus.push(add(app, ({
 //   tag: ':app/message',
 //   text: 'In Back to the Future, Doc states that the time machine is electrical but that he needs a nuclear reaction (produced by plutioum stolen from a group of Libyan terroists) to generate the 1.21 gigawatts of electricity needed.',
 //   author: john,
@@ -131,7 +113,7 @@ var megan = {
 //   room: 1
 // }))
 
-// vbus.push(app.add({
+// vbus.push(add(app, ({
 //   tag: ':app/message',
 //   text: 'In Back to the Future, Doc states that the time machine is electrical but that he needs a nuclear reaction (produced by plutioum stolen from a group of Libyan terroists) to generate the 1.21 gigawatts of electricity needed.',
 //   author: john,
@@ -140,7 +122,7 @@ var megan = {
 // }))
 
 // setTimeout(function() {
-//   vbus.push(app.add({
+//   vbus.push(add(app, ({
 //     tag: ':app/room',
 //     id: 4,
 //     members: Set.of(megan, casey),

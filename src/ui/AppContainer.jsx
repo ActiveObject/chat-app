@@ -4,6 +4,8 @@ import RoomList from 'app/ui/RoomList'
 import Chat from 'app/ui/Chat'
 import currentUser from 'app/identities/currentUser'
 import * as Github from 'app/github'
+import { push } from 'app/core/Runtime'
+import { add, addWatch, valueOf } from 'app/core/IdentityStore'
 
 var ChatSearch = React.createClass({
   render: function () {
@@ -31,14 +33,14 @@ var Login = React.createClass({
 
   auth: function () {
     Github.auth(app)
-      .then(user => vbus.push(app.add(user)))
+      .then(user => push(app, add(app, user)))
       .catch(err => console.log(err))
   }
 })
 
 export default React.createClass({
   componentWillMount: function () {
-    this.unsub = app.listen(currentUser, () => this.forceUpdate())
+    this.unsub = addWatch(app, currentUser, () => this.forceUpdate())
   },
 
   componentWillUnmount: function () {
@@ -58,7 +60,7 @@ export default React.createClass({
   },
 
   renderRoute: function () {
-    var user = app.valueOf(currentUser)
+    var user = valueOf(app, currentUser)
 
     if (user.status === 'unauthenticated') {
       return (

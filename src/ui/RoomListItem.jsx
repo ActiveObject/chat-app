@@ -3,10 +3,12 @@ import cx from 'classnames'
 import app from 'app'
 import activeRoom from 'app/identities/activeRoom'
 import * as Room from 'app/values/Room'
+import { add, addWatch, valueOf } from 'app/core/IdentityStore'
+import { push } from 'app/core/Runtime'
 
 export default React.createClass({
   componentWillMount: function () {
-    this.unsub = app.listen(activeRoom, () => this.forceUpdate())
+    this.unsub = addWatch(app, activeRoom, () => this.forceUpdate())
   },
 
   componentWillUnmount: function () {
@@ -16,7 +18,7 @@ export default React.createClass({
   render: function() {
     var picture = this.props.room.members.rest().first().picture
     var nickname = this.props.room.members.rest().first().nickname
-    var room = app.valueOf(activeRoom)
+    var room = valueOf(app, activeRoom)
     var classList = cx({
       'room-list-item': true,
       'room-list-item--active': room && room.id === this.props.room.id
@@ -39,6 +41,6 @@ export default React.createClass({
   },
 
   changeActiveRoom: function () {
-    vbus.push(app.add(Room.activate(this.props.room)))
+    push(app, add(app, Room.activate(this.props.room)))
   }
-});
+})
