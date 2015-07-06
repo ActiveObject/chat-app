@@ -14,12 +14,7 @@ import activeRoom from 'app/identities/activeRoom'
 
 function System(config) {
   this.firebase = config.firebase
-}
-
-System.prototype[Runtime.IStart] = function () {
-  this.dbRef = new Firebase(this.firebase)
   this[IdentityStore.ICallbackStore] = new WeakMap()
-
   this[IdentityStore.IVmap] = Map({
     ':app/rooms': [],
     ':app/currentUser': {
@@ -34,9 +29,13 @@ System.prototype[Runtime.IStart] = function () {
     [':app/rooms', rooms],
     [':app/currentUser', currentUser],
     [':app/activeRoom', activeRoom]
-  ];
+  ]
 
   this.vbus = new Bacon.Bus()
+}
+
+System.prototype[Runtime.IStart] = function () {
+  this.dbRef = new Firebase(this.firebase)
   this.unsub = this.vbus.onValue(changeRecord => IdentityStore.notify(this, changeRecord.db))
   React.render(React.createElement(AppContainer), document.getElementById('app'))
 }
