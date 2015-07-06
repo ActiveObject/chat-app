@@ -12,14 +12,14 @@ import 'app/styles/new-message-view.css'
 import 'app/styles/message.css'
 import 'app/styles/login.css'
 
-// vbus.map(changeRecord => changeRecord.value).log('value')
-// vbus.map(changeRecord => changeRecord.db.toJS()).log('db')
-
 var system = new System({
   firebase: 'https://ac-chat-app.firebaseio.com'
 })
 
 app.start(system)
+
+app.vbus.map(changeRecord => changeRecord.value).log('value')
+app.vbus.map(changeRecord => changeRecord.db.toJS()).log('db')
 
 var john = {
   tag: ':app/user',

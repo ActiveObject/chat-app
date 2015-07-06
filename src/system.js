@@ -18,7 +18,8 @@ function System(config) {
 
 System.prototype[Runtime.IStart] = function () {
   this.dbRef = new Firebase(this.firebase)
-  this[IdentityStore.ICallbackStore] = []
+  this[IdentityStore.ICallbackStore] = new WeakMap()
+
   this[IdentityStore.IVmap] = Map({
     ':app/rooms': [],
     ':app/currentUser': {
@@ -28,7 +29,13 @@ System.prototype[Runtime.IStart] = function () {
     },
     ':app/activeRoom': null
   })
-  this[IdentityStore.IIdentityStore] = [rooms, currentUser, activeRoom]
+
+  this[IdentityStore.IIdentityStore] = [
+    [':app/rooms', rooms],
+    [':app/currentUser', currentUser],
+    [':app/activeRoom', activeRoom]
+  ];
+
   this.vbus = new Bacon.Bus()
   this.unsub = this.vbus.onValue(changeRecord => IdentityStore.notify(this, changeRecord.db))
   React.render(React.createElement(AppContainer), document.getElementById('app'))

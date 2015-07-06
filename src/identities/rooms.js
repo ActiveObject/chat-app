@@ -1,8 +1,7 @@
-import { createIdentity } from 'app/core/IdentityStore'
 import tagOf from 'app/core/tagOf'
 import * as Room from 'app/values/Room'
 
-export default createIdentity(':app/rooms', [], function(xs, v) {
+export default function(xs, v) {
   if (tagOf(v) === ':app/room') {
     var ids = xs.map(room => room.id)
 
@@ -18,4 +17,4 @@ export default createIdentity(':app/rooms', [], function(xs, v) {
   }
 
   return xs
-})
+}

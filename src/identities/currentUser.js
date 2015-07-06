@@ -1,4 +1,3 @@
-import { createIdentity } from 'app/core/IdentityStore'
 import tagOf from 'app/core/tagOf'
 
 let unauthenticated = {
@@ -7,10 +6,10 @@ let unauthenticated = {
   current: true
 }
 
-export default createIdentity(':app/currentUser', unauthenticated, function(currentUser, v) {
+export default function(currentUser = unauthenticated, v) {
   if (tagOf(v) === ':app/user' && v.isCurrent) {
     return v
   }
 
   return currentUser
-})
+}
