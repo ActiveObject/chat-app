@@ -2,7 +2,7 @@ import React from 'react'
 import cx from 'classnames'
 import app from 'app'
 import activeRoom from 'app/identities/activeRoom'
-import * as Room from 'app/values/Room'
+import * as Room from 'app/Room'
 import { add, addWatch, valueOf } from 'app/core/IdentityStore'
 import { push } from 'app/core/Runtime'
 

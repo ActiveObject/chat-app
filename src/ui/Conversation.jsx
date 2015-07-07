@@ -1,6 +1,6 @@
 import React from 'react'
 import activeRoom from 'app/identities/activeRoom'
-import * as Message from 'app/values/Message'
+import * as Message from 'app/Message'
 import { add, addWatch, valueOf } from 'app/core/IdentityStore'
 import app from 'app'
 

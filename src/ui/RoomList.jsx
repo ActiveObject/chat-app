@@ -2,7 +2,7 @@ import React from 'react'
 import TransitionGroup from 'react/lib/ReactCSSTransitionGroup'
 import app from 'app'
 import rooms from 'app/identities/rooms'
-import * as Room from 'app/values/Room'
+import * as Room from 'app/Room'
 import { add, addWatch, valueOf } from 'app/core/IdentityStore'
 import 'app/styles/transition/fadein.css'
 

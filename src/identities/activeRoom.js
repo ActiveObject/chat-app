@@ -1,4 +1,4 @@
-import * as Room from 'app/values/Room'
+import * as Room from 'app/Room'
 import tagOf from 'app/core/tagOf'
 
 export default function(activeRoom, v) {

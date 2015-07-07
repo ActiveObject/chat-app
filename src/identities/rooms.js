@@ -1,5 +1,5 @@
 import tagOf from 'app/core/tagOf'
-import * as Room from 'app/values/Room'
+import * as Room from 'app/Room'
 
 export default function(xs, v) {
   if (tagOf(v) === ':app/room') {
