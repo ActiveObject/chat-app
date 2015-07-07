@@ -3,7 +3,7 @@ import app from 'app'
 import RoomList from 'app/ui/RoomList'
 import Chat from 'app/ui/Chat'
 import currentUser from 'app/identities/currentUser'
-import * as Github from 'app/github'
+import * as Github from 'app/Github'
 import { push } from 'app/core/Runtime'
 import { add, addWatch, valueOf } from 'app/core/IdentityStore'
 

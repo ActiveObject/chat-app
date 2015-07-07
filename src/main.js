@@ -1,6 +1,6 @@
 import {Set, List} from 'immutable'
 import app from 'app'
-import System from 'app/system'
+import System from 'app/System'
 import { push } from 'app/core/Runtime'
 import { add } from 'app/core/IdentityStore'
 
