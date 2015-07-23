@@ -1,7 +1,5 @@
 export var IVmap = Symbol('IdentityStore.IVmap')
 export var IIdentityStore = Symbol('IdentityStore.IIdentityStore')
-export var ICallbackStore = Symbol('IdentityStore.ICallbackStore')
-
 
 export function add(target, v) {
   var vmap = target[IVmap]
@@ -16,31 +14,6 @@ export function add(target, v) {
       return valueMap.set(idRecord[0], nextState)
     }, vmap)
   }
-}
-
-export function addWatch(target, identity, callback) {
-  var cmap = target[ICallbackStore]
-
-  if (!cmap.has(identity)) {
-    cmap.set(identity, [])
-  }
-
-  cmap.get(identity).push(callback)
-}
-
-export function notify(target, vmap) {
-  var cmap = target[ICallbackStore]
-  var imap = target[IIdentityStore]
-
-  target[IVmap] = vmap
-  target[IIdentityStore].forEach(function (identityRecord) {
-    var [key, identity] = identityRecord
-    var callbacks = cmap.get(identity)
-
-    if (Array.isArray(callbacks)) {
-      callbacks.forEach(callback => callback(vmap.get(key)))
-    }
-  })
 }
 
 export function valueOf(target, identity, defValue) {

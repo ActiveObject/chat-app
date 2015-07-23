@@ -1,50 +1,42 @@
 import React from 'react'
-import Bacon from 'baconjs'
-import { Map } from 'immutable'
 import Firebase from 'firebase'
 import * as Github from 'app/Github'
-import * as Runtime from 'app/core/Runtime'
 import * as IdentityStore from 'app/core/IdentityStore'
 import AppContainer from 'app/ui/AppContainer'
+import merge from 'app/core/merge'
 
 import rooms from 'app/identities/rooms'
 import currentUser from 'app/identities/currentUser'
 import activeRoom from 'app/identities/activeRoom'
 
-function System(config) {
-  this.firebase = config.firebase
-  this[IdentityStore.ICallbackStore] = new WeakMap()
-  this[IdentityStore.IVmap] = Map({
-    ':app/rooms': [],
-    ':app/currentUser': {
-      tag: ':app/user',
-      status: 'unauthenticated',
-      current: true
-    },
-    ':app/activeRoom': null
-  })
+function System(attrs) {
+  this.firebase = attrs.firebase
+  this.rootEl = attrs.rootEl
+  this.dbRef = attrs.dbRef
+  this.value = attrs.value
 
+  this[IdentityStore.IVmap] = this.value;
   this[IdentityStore.IIdentityStore] = [
     [':app/rooms', rooms],
     [':app/currentUser', currentUser],
     [':app/activeRoom', activeRoom]
   ]
-
-  this.vbus = new Bacon.Bus()
 }
 
-System.prototype[Runtime.IStart] = function () {
-  this.dbRef = new Firebase(this.firebase)
-  this.unsub = this.vbus.onValue(changeRecord => IdentityStore.notify(this, changeRecord.db))
-  React.render(React.createElement(AppContainer), document.getElementById('app'))
+System.prototype.use = function (db) {
+  return new System(merge(this, {
+    value: db
+  }))
 }
 
-System.prototype[Runtime.IStop] = function () {
-  this.unsub()
+System.prototype.start = function () {
+  return new System(merge(this, {
+    dbRef: new Firebase(this.firebase)
+  }))
 }
 
-System.prototype[Runtime.IPush] = function (v) {
-  this.vbus.push(v)
+System.prototype.render = function () {
+  React.render(React.createElement(AppContainer), this.rootEl)
 }
 
 System.prototype[Github.IAuth] = function () {

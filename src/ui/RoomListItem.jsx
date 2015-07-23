@@ -3,18 +3,9 @@ import cx from 'classnames'
 import app from 'app'
 import activeRoom from 'app/identities/activeRoom'
 import * as Room from 'app/Room'
-import { add, addWatch, valueOf } from 'app/core/IdentityStore'
-import { push } from 'app/core/Runtime'
+import { add, valueOf } from 'app/core/IdentityStore'
 
 export default React.createClass({
-  componentWillMount: function () {
-    this.unsub = addWatch(app, activeRoom, () => this.forceUpdate())
-  },
-
-  componentWillUnmount: function () {
-    this.unsub()
-  },
-
   render: function() {
     var picture = this.props.room.members.rest().first().picture
     var nickname = this.props.room.members.rest().first().nickname
@@ -41,6 +32,6 @@ export default React.createClass({
   },
 
   changeActiveRoom: function () {
-    push(app, add(app, Room.activate(this.props.room)))
+    app.push(add(app, Room.activate(this.props.room)))
   }
 })

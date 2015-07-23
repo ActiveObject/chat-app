@@ -2,8 +2,7 @@ import IScroll from 'iscroll/build/iscroll'
 import Conversation from 'app/ui/Conversation'
 import NewMessageView from 'app/ui/NewMessageView'
 import app from 'app'
-import { add, addWatch, valueOf } from 'app/core/IdentityStore'
-import { push } from 'app/core/Runtime'
+import { add, valueOf } from 'app/core/IdentityStore'
 
 import currentUser from 'app/identities/currentUser'
 import activeRoom from 'app/identities/activeRoom'
@@ -37,16 +36,6 @@ var ScrollLayer = React.createClass({
 
 
 export default React.createClass({
-  componentWillMount: function () {
-    this.release = addWatch(app, activeRoom, () => this.forceUpdate());
-    this.release2 = addWatch(app, currentUser, () => this.forceUpdate());
-  },
-
-  componentWillUnmount: function () {
-    this.release()
-    this.release2()
-  },
-
   render: function() {
     var room = valueOf(app, activeRoom);
     var messages = room ? room.history : [];
@@ -77,6 +66,6 @@ export default React.createClass({
       room: valueOf(app, activeRoom).id
     })
 
-    push(app, newDb)
+    app.push(newDb)
   }
 })
