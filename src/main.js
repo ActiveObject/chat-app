@@ -32,32 +32,28 @@ app.start(system)
 var john = {
   tag: ':app/user',
   nickname: 'john',
-  firstName: 'John',
-  lastName: 'Smith',
+  displayName: 'John Smith',
   picture: 'https://s3.amazonaws.com/uifaces/faces/twitter/gerrenlamson/48.jpg'
 }
 
 var casey = {
   tag: ':app/user',
   nickname: 'casey',
-  firstName: 'Casey',
-  lastName: 'James',
+  displayName: 'Casey James',
   picture: 'https://s3.amazonaws.com/uifaces/faces/twitter/mattchevy/48.jpg'
 }
 
 var bejamin = {
   tag: ':app/user',
   nickname: 'bejamin',
-  firstName: 'Benjamin',
-  lastName: 'Franklin',
+  displayName: 'Benjamin Franklin',
   picture: 'https://s3.amazonaws.com/uifaces/faces/twitter/jadlimcaco/48.jpg'
 }
 
 var megan = {
   tag: ':app/user',
   nickname: 'megan',
-  firstName: 'Megan',
-  lastName: 'Fox',
+  displayName: 'Megan Fox',
   picture: 'https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/48.jpg'
 }
 
