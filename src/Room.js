@@ -1,4 +1,5 @@
 import merge from 'app/core/merge'
+import addTag from 'app/core/addTag'
 import RoomListItem from 'app/ui/RoomListItem'
 
 export function addMessage(room, msg) {
@@ -12,10 +13,7 @@ export function addMessage(room, msg) {
 }
 
 export function activate(room) {
-  return {
-    tag: ':app/active-room',
-    value: room
-  }
+  return addTag(room, ':room/active')
 }
 
 export function renderListItem(room) {

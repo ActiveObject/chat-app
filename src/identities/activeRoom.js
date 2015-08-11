@@ -1,12 +1,12 @@
 import * as Room from 'app/Room'
-import tagOf from 'app/core/tagOf'
+import hasTag from 'app/core/hasTag'
 
 export default function(activeRoom, v) {
-  if (tagOf(v) === ':app/active-room') {
-    return v.value
+  if (hasTag(v, ':room/active')) {
+    return v
   }
 
-  if (tagOf(v) === ':app/message') {
+  if (hasTag(v, ':app/message')) {
     return Room.addMessage(activeRoom, v)
   }
 

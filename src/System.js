@@ -49,8 +49,7 @@ System.prototype[Github.IAuth] = function () {
       }
 
       resolve({
-        tag: ':app/user',
-        isCurrent: true,
+        tag: [':app/user', ':user/authenticated', ':user/current'],
         uid: authData.uid,
         username: authData.github.username,
         displayName: authData.github.displayName,

@@ -1,15 +1,9 @@
-import tagOf from 'app/core/tagOf'
+import hasTag from 'app/core/hasTag'
 
 let unauthenticated = {
-  tag: ':app/user',
-  status: 'unauthenticated',
-  current: true
+  tag: [':app/user', ':user/current']
 }
 
 export default function(currentUser = unauthenticated, v) {
-  if (tagOf(v) === ':app/user' && v.isCurrent) {
-    return v
-  }
-
-  return currentUser
+  return hasTag(v, [':app/user', ':user/current']) ? v : currentUser
 }

@@ -17,9 +17,7 @@ var system = new System({
   value: Map({
     ':app/rooms': [],
     ':app/currentUser': {
-      tag: ':app/user',
-      status: 'unauthenticated',
-      current: true
+      tag: [':app/user', ':user/current']
     },
     ':app/activeRoom': null
   })

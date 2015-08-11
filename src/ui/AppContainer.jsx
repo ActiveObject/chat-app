@@ -5,6 +5,7 @@ import Chat from 'app/ui/Chat'
 import currentUser from 'app/identities/currentUser'
 import * as Github from 'app/Github'
 import { add, valueOf } from 'app/core/IdentityStore'
+import hasTag from 'app/core/hasTag'
 
 var ChatSearch = React.createClass({
   render: function () {
@@ -53,7 +54,7 @@ export default React.createClass({
   renderRoute: function () {
     var user = valueOf(app, currentUser)
 
-    if (user.status === 'unauthenticated') {
+    if (!hasTag(user, ':user/authenticated')) {
       return (
         <div className='app-container__outlet'>
           <Login/>
